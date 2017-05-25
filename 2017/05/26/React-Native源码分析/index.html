@@ -74,7 +74,7 @@
 <link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="源码分析," />
 
 
 
@@ -90,15 +90,17 @@
 
 
 
-<meta name="description" content="个人博客">
-<meta property="og:type" content="website">
-<meta property="og:title" content="积小流,成江海">
-<meta property="og:url" content="http://www.rockspur.com/index.html">
+<meta name="description" content="初次尝试使用Rn进行开发，期间在扩展自定义组建时，遇到了布局的问题。粗略了解后，才发现RN接管了组建的layout。借此机会，索性开坑梳理一遍源码，并以此博文记录，此博文将不定时更新。">
+<meta name="keywords" content="源码分析">
+<meta property="og:type" content="article">
+<meta property="og:title" content="React Native源码分析">
+<meta property="og:url" content="http://www.rockspur.com/2017/05/26/React-Native源码分析/index.html">
 <meta property="og:site_name" content="积小流,成江海">
-<meta property="og:description" content="个人博客">
+<meta property="og:description" content="初次尝试使用Rn进行开发，期间在扩展自定义组建时，遇到了布局的问题。粗略了解后，才发现RN接管了组建的layout。借此机会，索性开坑梳理一遍源码，并以此博文记录，此博文将不定时更新。">
+<meta property="og:updated_time" content="2017-05-25T16:20:12.972Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="积小流,成江海">
-<meta name="twitter:description" content="个人博客">
+<meta name="twitter:title" content="React Native源码分析">
+<meta name="twitter:description" content="初次尝试使用Rn进行开发，期间在扩展自定义组建时，遇到了布局的问题。粗略了解后，才发现RN接管了组建的layout。借此机会，索性开坑梳理一遍源码，并以此博文记录，此博文将不定时更新。">
 
 
 
@@ -126,13 +128,13 @@
 
 
 
-  <link rel="canonical" href="http://www.rockspur.com/"/>
+  <link rel="canonical" href="http://www.rockspur.com/2017/05/26/React-Native源码分析/"/>
 
 
 
 
 
-  <title>积小流,成江海</title>
+  <title>React Native源码分析 | 积小流,成江海</title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
@@ -158,9 +160,7 @@
     
   
 
-  <div class="container sidebar-position-left 
-   page-home 
- ">
+  <div class="container sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -243,9 +243,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
 
@@ -271,9 +271,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/05/26/React-Native源码分析/" itemprop="url">React Native源码分析</a></h1>
+          <h1 class="post-title" itemprop="name headline">React Native源码分析</h1>
         
 
         <div class="post-meta">
@@ -320,46 +318,58 @@
       
 
       
+        <p>初次尝试使用Rn进行开发，期间在扩展自定义组建时，遇到了布局的问题。粗略了解后，才发现RN接管了组建的layout。借此机会，索性开坑梳理一遍源码，并以此博文记录，此博文将不定时更新。</p>
+
+      
+    </div>
+
+    <div>
+      
         
-          
-            <p>初次尝试使用Rn进行开发，期间在扩展自定义组建时，遇到了布局的问题。粗略了解后，才发现RN接管了组建的layout。借此机会，索性开坑梳理一遍源码，并以此博文记录，此博文将不定时更新。</p>
 
-          
+      
+    </div>
+
+    <div>
+      
         
+
       
     </div>
 
     <div>
       
-    </div>
+        
 
-    <div>
-      
-    </div>
-
-    <div>
       
     </div>
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/源码分析/" rel="tag"># 源码分析</a>
+          
+        </div>
+      
+
+      
+        
+      
 
       
 
       
-
-      
-      
-        <div class="post-eof"></div>
       
     </footer>
   </article>
 
 
-    
-  </section>
 
-  
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -367,6 +377,10 @@
 
 
           
+  <div class="comments" id="comments">
+    
+  </div>
+
 
         </div>
         
@@ -553,6 +567,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
 
   
 
