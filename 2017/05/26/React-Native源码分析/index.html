@@ -90,17 +90,20 @@
 
 
 
-<meta name="description" content="初次尝试使用RN进行开发，期间在扩展自定义组建时，遇到了布局的问题。粗略了解后，才发现RN接管了组件的layout。借此机会，索性开坑过一遍源码，梳理下流程，并以此博文记录，此博文将不定期更新。">
+<meta name="description" content="初次尝试使用RN进行开发，期间在扩展自定义组件时，遇到了布局的问题。粗略了解后，才发现RN接管了组件的layout。借此机会，索性开坑过一遍源码，梳理下流程，并以此博文记录，此博文将不定期更新。 通常，我们读源码，只是为了寻找某些问题的答案。所以，此博文将以Q&amp;amp;A形式展开，通过问题，在源码中寻找答案。 Q1: 使用RN开发的应用,在启动过程中做了什么?  Application类:  @O">
 <meta name="keywords" content="源码分析">
 <meta property="og:type" content="article">
 <meta property="og:title" content="React Native源码分析">
 <meta property="og:url" content="http://www.rockspur.com/2017/05/26/React-Native源码分析/index.html">
 <meta property="og:site_name" content="江海小流">
-<meta property="og:description" content="初次尝试使用RN进行开发，期间在扩展自定义组建时，遇到了布局的问题。粗略了解后，才发现RN接管了组件的layout。借此机会，索性开坑过一遍源码，梳理下流程，并以此博文记录，此博文将不定期更新。">
-<meta property="og:updated_time" content="2017-05-25T16:52:49.435Z">
+<meta property="og:description" content="初次尝试使用RN进行开发，期间在扩展自定义组件时，遇到了布局的问题。粗略了解后，才发现RN接管了组件的layout。借此机会，索性开坑过一遍源码，梳理下流程，并以此博文记录，此博文将不定期更新。 通常，我们读源码，只是为了寻找某些问题的答案。所以，此博文将以Q&amp;amp;A形式展开，通过问题，在源码中寻找答案。 Q1: 使用RN开发的应用,在启动过程中做了什么?  Application类:  @O">
+<meta property="og:image" content="http://oqt6a0nuu.bkt.clouddn.com/rn源码分析_application.png">
+<meta property="og:image" content="http://oqt6a0nuu.bkt.clouddn.com/%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B.png">
+<meta property="og:updated_time" content="2017-06-04T08:22:22.768Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="React Native源码分析">
-<meta name="twitter:description" content="初次尝试使用RN进行开发，期间在扩展自定义组建时，遇到了布局的问题。粗略了解后，才发现RN接管了组件的layout。借此机会，索性开坑过一遍源码，梳理下流程，并以此博文记录，此博文将不定期更新。">
+<meta name="twitter:description" content="初次尝试使用RN进行开发，期间在扩展自定义组件时，遇到了布局的问题。粗略了解后，才发现RN接管了组件的layout。借此机会，索性开坑过一遍源码，梳理下流程，并以此博文记录，此博文将不定期更新。 通常，我们读源码，只是为了寻找某些问题的答案。所以，此博文将以Q&amp;amp;A形式展开，通过问题，在源码中寻找答案。 Q1: 使用RN开发的应用,在启动过程中做了什么?  Application类:  @O">
+<meta name="twitter:image" content="http://oqt6a0nuu.bkt.clouddn.com/rn源码分析_application.png">
 
 
 
@@ -201,7 +204,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
-            Startseite
+            Home
           </a>
         </li>
       
@@ -211,7 +214,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
-            Archiv
+            Archives
           </a>
         </li>
       
@@ -281,7 +284,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-05-26T00:11:17+08:00">
                 2017-05-26
@@ -318,7 +321,41 @@
       
 
       
-        <p>初次尝试使用RN进行开发，期间在扩展自定义组建时，遇到了布局的问题。粗略了解后，才发现RN接管了组件的layout。借此机会，索性开坑过一遍源码，梳理下流程，并以此博文记录，此博文将不定期更新。</p>
+        <p>初次尝试使用RN进行开发，期间在扩展自定义组件时，遇到了布局的问题。粗略了解后，才发现RN接管了组件的layout。借此机会，索性开坑过一遍源码，梳理下流程，并以此博文记录，此博文将不定期更新。</p>
+<p>通常，我们读源码，只是为了寻找某些问题的答案。所以，此博文将以Q&amp;A形式展开，通过问题，在源码中寻找答案。</p>
+<p><em>Q1: 使用RN开发的应用,在启动过程中做了什么?</em></p>
+<blockquote>
+<p><code>Application</code>类:</p>
+<p><img src="http://oqt6a0nuu.bkt.clouddn.com/rn源码分析_application.png" alt="Application"></p>
+<pre><code>@Override
+public void onCreate() {
+  super.onCreate();
+  SoLoader.init(this, /* native exopackage */ false);
+}
+</code></pre><p>如上, Application实现了接口<code>ReactApplication</code>,需实现方法<code>getReactNativeHost</code>,返回 <code>ReactNativeHost</code> 实例. <code>onCreate</code>中初始化了<code>SoLoader</code>. 而 <code>SoLoader</code> 实质不属于RN的一部分. 其为Facebook另外一个开源库, 用于动态链接库的加载.</p>
+<p><code>Activity</code>中:</p>
+<p><img src="http://oqt6a0nuu.bkt.clouddn.com/%E5%90%AF%E5%8A%A8%E6%B5%81%E7%A8%8B.png" alt="启动流程"></p>
+<p>使用RN开发需让 <code>Activity</code> 需继承自 <code>ReactActivity</code>. 而其中真正工作的是 <code>ReactActivityDelegate</code>(代理模式 ?)代处理.</p>
+<p>其<code>onCreate</code>做了3件事情:</p>
+<ol>
+<li>检查overlay的权限;</li>
+<li>loadApp,执行RN加载的逻辑；</li>
+<li>创建R键双击reload识别器；</li>
+</ol>
+<p>着重看第2步:<code>loadApp</code></p>
+<pre><code>protected void loadApp(String appKey) {
+  if (mReactRootView != null) {
+    throw new IllegalStateException(&quot;Cannot loadApp while app is already running.&quot;);
+  }
+  mReactRootView = createRootView();
+  mReactRootView.startReactApplication(
+    getReactNativeHost().getReactInstanceManager(),
+    appKey,
+    getLaunchOptions());
+  getPlainActivity().setContentView(mReactRootView);
+}
+</code></pre><p><code>loadApp</code> 实际上是创建了 <code>ReactRootView</code>, 再 <code>startReactApplication</code> 启动整套RN的通讯机制, 并将 <code>ReactRootView</code> 设置为 <code>Activity</code> 的 <code>ContentView</code> , 最终显示出来. 所以,真正的启动工作是调用 <code>ReactRootView</code> 的 <code>startReactApplication</code> 进行的.</p>
+</blockquote>
 
       
     </div>
@@ -417,7 +454,7 @@
             <div class="site-state-item site-state-posts">
               <a href="/archives">
                 <span class="site-state-item-count">1</span>
-                <span class="site-state-item-name">Artikel</span>
+                <span class="site-state-item-name">posts</span>
               </a>
             </div>
           
@@ -430,7 +467,7 @@
             <div class="site-state-item site-state-tags">
               
                 <span class="site-state-item-count">1</span>
-                <span class="site-state-item-name">Tags</span>
+                <span class="site-state-item-name">tags</span>
               
             </div>
           
@@ -480,7 +517,7 @@
 
 
 <div class="powered-by">
-  Erstellt mit  <a class="theme-link" href="https://hexo.io">Hexo</a>
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
 </div>
 
 <div class="theme-info">
